@@ -62,9 +62,14 @@ class TokenAuthentication
             throw new \RuntimeException('authenticator option has not been set or it is not callable.');
 
         try {
-
-            if ($this->options['authenticator']($request, $this) === false) {
+            $auth_request = $this->options['authenticator']($request, $this);
+            
+            if ($auth_requset === false) {
                 return $this->error($request, $response);
+            }
+            
+            if ($auth_request instanceof Request) {
+                return $next($auth_request, $response);
             }
 
             return $next($request, $response);
