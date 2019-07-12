@@ -64,7 +64,7 @@ class TokenAuthentication
         try {
             $auth_request = $this->options['authenticator']($request, $this);
             
-            if ($auth_requset === false) {
+            if ($auth_request === false) {
                 return $this->error($request, $response);
             }
             
