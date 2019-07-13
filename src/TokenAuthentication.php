@@ -92,6 +92,10 @@ class TokenAuthentication
 
     public function shouldAuthenticate(Request $request)
     {
+        if ($request->getMethod() == 'OPTIONS') {
+            return false;
+        }
+
         $uri = $request->getUri()->getPath();
         $uri = '/' . trim($uri, '/');
 
